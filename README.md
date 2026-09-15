@@ -58,33 +58,33 @@ JSON 文件采用以下顶层结构：
 
 顶层字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
+| 字段            | 类型   | 说明                     |
+| --------------- | ------ | ------------------------ |
 | `schemaVersion` | number | 数据格式版本，当前为 `1` |
-| `exportedAt` | string | 导出时间，ISO 8601 格式 |
-| `records` | array | 工作记录数组 |
+| `exportedAt`    | string | 导出时间，ISO 8601 格式  |
+| `records`       | array  | 工作记录数组             |
 
 每条工作记录的字段：
 
-| 字段 | 类型 | 必填 | 格式或可选值 |
-| --- | --- | --- | --- |
-| `id` | string | 否 | 唯一标识；缺失时导入过程会自动生成 |
-| `title` | string | 是 | 工作内容 |
-| `project` | string | 否 | 项目或分类 |
-| `owner` | string | 否 | 负责人 |
-| `startDate` | string | 是 | `YYYY-MM-DD` |
-| `endDate` | string | 是 | `YYYY-MM-DD`，不能早于开始日期 |
-| `startTime` | string | 否 | `HH:mm` |
-| `endTime` | string | 否 | `HH:mm` |
-| `status` | string | 否 | `todo`、`doing`、`done`、`blocked` |
-| `priority` | string | 否 | `normal`、`high`、`urgent` |
-| `place` | string | 否 | 地点或线上渠道 |
-| `notes` | string | 否 | 补充说明 |
-| `color` | string | 否 | 页面支持的十六进制标记色 |
-| `createdAt` | string | 否 | ISO 8601 格式的创建时间 |
-| `updatedAt` | string | 否 | ISO 8601 格式的最后更新时间 |
+| 字段        | 类型   | 必填 | 格式或可选值                       |
+| ----------- | ------ | ---- | ---------------------------------- |
+| `id`        | string | 否   | 唯一标识；缺失时导入过程会自动生成 |
+| `title`     | string | 是   | 工作内容                           |
+| `project`   | string | 否   | 项目或分类                         |
+| `owner`     | string | 否   | 负责人                             |
+| `startDate` | string | 是   | `YYYY-MM-DD`                       |
+| `endDate`   | string | 是   | `YYYY-MM-DD`，不能早于开始日期     |
+| `startTime` | string | 否   | `HH:mm`                            |
+| `endTime`   | string | 否   | `HH:mm`                            |
+| `status`    | string | 否   | `todo`、`doing`、`done`、`blocked` |
+| `priority`  | string | 否   | `normal`、`high`、`urgent`         |
+| `place`     | string | 否   | 地点或线上渠道                     |
+| `notes`     | string | 否   | 补充说明                           |
+| `color`     | string | 否   | 页面支持的十六进制标记色           |
+| `createdAt` | string | 否   | ISO 8601 格式的创建时间            |
+| `updatedAt` | string | 否   | ISO 8601 格式的最后更新时间        |
 
-导入时也兼容直接以记录数组作为顶层内容的旧格式。缺失的可选字段会使用默认值；缺少 `title`、`startDate` 或 `endDate` 的记录会被忽略。
+导入时也兼容直接以记录数组作为顶层内容的旧格式。缺失的可选字段会使用默认值；若存在缺少必填内容、无效日期、无效时间或字段类型错误的记录，整个文件会被拒绝，当前数据不变。重复 ID 会自动重新生成；空数组备份也可导入。
 
 ## 分享
 
